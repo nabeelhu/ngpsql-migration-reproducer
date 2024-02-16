@@ -1,5 +1,5 @@
-﻿using Migration.Reproducer.Models;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Migration.Reproducer.Models;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -10,6 +10,7 @@ namespace Migration.Reproducer.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
             migrationBuilder.Sql("CREATE TYPE status_type AS ENUM ('active', 'inactive')");
 
             migrationBuilder.EnsureSchema(
@@ -17,6 +18,7 @@ namespace Migration.Reproducer.Migrations
             migrationBuilder.Sql("DROP SCHEMA test_schema CASCADE");
             migrationBuilder.EnsureSchema(
                       name: "test_schema");
+
 
             migrationBuilder.CreateTable(
                 name: "MyEntities",
@@ -26,7 +28,8 @@ namespace Migration.Reproducer.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    status = table.Column<StatusType>(type: "status_type", nullable: false)
+                    status = table.Column<StatusType>(type: "status_type", nullable: false),
+                    status_type = table.Column<StatusType>(type: "status_type", nullable: false)
                 },
                 constraints: table =>
                 {
