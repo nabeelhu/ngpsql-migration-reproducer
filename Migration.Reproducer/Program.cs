@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using Xunit;
+using System.Xml.Serialization;
 Console.WriteLine("Hello, World!");
 
 
@@ -30,7 +31,7 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("test_schema");
-        modelBuilder.HasPostgresEnum<StatusType>();
+        modelBuilder.HasPostgresEnum<StatusType>(schema: "test_schema");
 
         modelBuilder.Entity<MyEntity>()
             .HasDiscriminator<StatusType>("status_type")
