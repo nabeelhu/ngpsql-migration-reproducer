@@ -9,17 +9,10 @@ Console.WriteLine("Hello, World!");
 
 
 
-
-
-
-
 public class AppDbContext : DbContext
 {
     public DbSet<MyEntity> MyEntities { get; set; }
-    public AppDbContext(DbContextOptions options)
-: base(options)
-    {
-    }
+
     static AppDbContext()
     {
         NpgsqlConnection.GlobalTypeMapper.MapEnum<StatusType>();

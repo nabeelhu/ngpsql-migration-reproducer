@@ -12,10 +12,21 @@ namespace Migration.Reproducer.Models
         Inactive
     }
 
-    public class MyEntity
+    public abstract class MyEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public StatusType status { get; set; }
+    }
+
+    public class ActiveEntity : MyEntity
+    {
+
+
+    }
+    public class InactiveEntity : MyEntity
+    {
+
+
     }
 }

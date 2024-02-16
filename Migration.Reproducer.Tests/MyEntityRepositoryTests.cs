@@ -8,15 +8,12 @@ namespace Migration.Reproducer.Tests
 {
     public class MyEntityRepositoryTests: IDisposable
     {
-        private readonly DbContextOptions<AppDbContext> options;
           
 
         public MyEntityRepositoryTests()
         {
-            options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseNpgsql("Server=127.0.0.1;Port=5432;Database=test_db;User Id=postgres;Password=password;")
-          .Options;
-            using (var dbContext = new AppDbContext(options))
+           
+            using (var dbContext = new AppDbContext())
             {
                 dbContext.Database.Migrate();
                 if (dbContext.Database.GetDbConnection() is NpgsqlConnection npgsqlConnection)
@@ -31,7 +28,7 @@ namespace Migration.Reproducer.Tests
         public void Dispose()
         {
             // Dispose of resources, such as the database context
-            using (var dbContext = new AppDbContext(options))
+            using (var dbContext = new AppDbContext())
             {
                 dbContext.Database.EnsureDeleted();
             }
@@ -42,20 +39,23 @@ namespace Migration.Reproducer.Tests
             // Arrange
       
 
-            using (var dbContext = new AppDbContext(options))
+            using (var dbContext = new AppDbContext())
             {
                 var repository = new MyEntityRepository(dbContext);
 
                 // Act
-                repository.Add(new MyEntity { Id = 1, Name = "TestEntity 1", status = StatusType.Active });
-                repository.Add(new MyEntity { Id = 2, Name = "TestEntity 2", status = StatusType.Inactive });
-                repository.Add(new MyEntity { Id = 3, Name = "TestEntity 3", status = StatusType.Active });
+                repository.Add(new ActiveEntity { Id = 1, Name = "TestEntity 1" });
+                repository.Add(new InactiveEntity { Id = 2, Name = "TestEntity 2", status = StatusType.Inactive });
+                repository.Add(new ActiveEntity { Id = 3, Name = "TestEntity 3", status = StatusType.Active });
 
                 // Assert
                 var entity = repository.GetById(1);
-                Assert.NotNull(entity);
+                
+                Assert.NotNull(repository.GetAllActive());
                 Assert.Equal("TestEntity 1", entity.Name);
                 Assert.Equal(3, repository.GetAll().Count());
+                Assert.Equal(2, repository.GetAllActive().Count());
+                Assert.Equal(1, repository.GetAllInactive().Count());
 
             }
         }

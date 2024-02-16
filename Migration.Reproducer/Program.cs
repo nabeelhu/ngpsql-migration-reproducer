@@ -16,10 +16,9 @@ Console.WriteLine("Hello, World!");
 public class AppDbContext : DbContext
 {
     public DbSet<MyEntity> MyEntities { get; set; }
-    public AppDbContext(DbContextOptions options)
-: base(options)
-    {
-    }
+    public DbSet<ActiveEntity> ActiveEntities { get; set; }
+    public DbSet<InactiveEntity> InactiveEntities { get; set; }
+
     static AppDbContext()
     {
         NpgsqlConnection.GlobalTypeMapper.MapEnum<StatusType>();
@@ -32,6 +31,11 @@ public class AppDbContext : DbContext
     {
         modelBuilder.HasDefaultSchema("test_schema");
         modelBuilder.HasPostgresEnum<StatusType>();
+
+        modelBuilder.Entity<MyEntity>()
+            .HasDiscriminator<StatusType>("status_type")
+        .HasValue<ActiveEntity>(StatusType.Active)
+        .HasValue<InactiveEntity>(StatusType.Inactive);
     }
 }
 
@@ -59,6 +63,14 @@ public class MyEntityRepository
     public IQueryable<MyEntity> GetAll()
     {
         return _dbContext.MyEntities.AsQueryable();
+    }
+    public IQueryable<MyEntity> GetAllActive()
+    {
+        return _dbContext.ActiveEntities.AsQueryable();
+    }
+    public IQueryable<MyEntity> GetAllInactive()
+    {
+        return _dbContext.InactiveEntities.AsQueryable();
     }
 
     public void Update(MyEntity entity)
