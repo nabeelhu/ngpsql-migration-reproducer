@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.Reproducer", "Migration.Reproducer\Migration.Reproducer.csproj", "{7BD4B427-F9AE-48C5-9B24-1396D0BD6587}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.Reproducer.Tests", "Migration.Reproducer.Tests\Migration.Reproducer.Tests.csproj", "{EB3A86C5-6754-482B-B407-E29FDD6E4367}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BD4B427-F9AE-48C5-9B24-1396D0BD6587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BD4B427-F9AE-48C5-9B24-1396D0BD6587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BD4B427-F9AE-48C5-9B24-1396D0BD6587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BD4B427-F9AE-48C5-9B24-1396D0BD6587}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB3A86C5-6754-482B-B407-E29FDD6E4367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB3A86C5-6754-482B-B407-E29FDD6E4367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB3A86C5-6754-482B-B407-E29FDD6E4367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB3A86C5-6754-482B-B407-E29FDD6E4367}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB17238F-9887-445E-A75C-BE123C42946D}
+	EndGlobalSection
+EndGlobal
